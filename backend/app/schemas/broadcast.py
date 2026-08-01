@@ -1,13 +1,13 @@
 """Схемы для рассылок — массовые сообщения клиентам через бота."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
 
-class BroadcastSegment(str, Enum):
+class BroadcastSegment(StrEnum):
     """Сегменты для рассылки — кому шлем."""
 
     all = "all"
@@ -15,7 +15,7 @@ class BroadcastSegment(str, Enum):
     inactive = "inactive"
 
 
-class BroadcastStatus(str, Enum):
+class BroadcastStatus(StrEnum):
     """Статус рассылки — от черновика до завершения."""
 
     draft = "draft"

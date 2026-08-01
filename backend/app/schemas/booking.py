@@ -1,13 +1,13 @@
 """Схемы для бронирований — записи клиентов на услуги."""
 
 from datetime import date, datetime, time
-from enum import Enum
+from enum import StrEnum
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
 
-class BookingStatus(str, Enum):
+class BookingStatus(StrEnum):
     """Статусы бронирования — весь жизненный цикл записи."""
 
     pending = "pending"

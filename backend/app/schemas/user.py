@@ -1,13 +1,13 @@
 """Схемы для пользователей системы (владелец, оператор)."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, EmailStr
 
 
-class UserRole(str, Enum):
+class UserRole(StrEnum):
     """Роли в системе — пока только владелец и оператор."""
 
     owner = "owner"
