@@ -1,8 +1,49 @@
+import { Component, type ReactNode } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { AuthProvider } from '@/contexts/AuthContext'
 import ProtectedRoute from '@/components/layout/ProtectedRoute'
 import AppLayout from '@/components/layout/AppLayout'
+
+/** Ловит ошибки рендера — чтобы все приложение не падало */
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <h1 className="mb-2 text-2xl font-bold">Что-то пошло не так</h1>
+            <p className="mb-4 text-gray-600">
+              Произошла непредвиденная ошибка
+            </p>
+            <button
+              onClick={() => {
+                this.setState({ hasError: false })
+                window.location.href = '/'
+              }}
+              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            >
+              Вернуться на главную
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
 
 // Страницы
 import LoginPage from '@/pages/LoginPage'
@@ -28,6 +69,7 @@ import NotFoundPage from '@/pages/NotFoundPage'
  */
 export default function App() {
   return (
+    <ErrorBoundary>
     <BrowserRouter>
       <AuthProvider>
         <Routes>
@@ -94,5 +136,6 @@ export default function App() {
         <Toaster position="top-right" richColors closeButton />
       </AuthProvider>
     </BrowserRouter>
+    </ErrorBoundary>
   )
 }

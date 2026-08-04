@@ -77,7 +77,7 @@ async def stop_scheduler() -> None:
     global scheduler
 
     if scheduler and scheduler.running:
-        scheduler.shutdown(wait=False)
+        scheduler.shutdown(wait=True)
         logger.info("scheduler_stopped")
 
     scheduler = None

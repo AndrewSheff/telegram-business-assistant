@@ -1,33 +1,42 @@
+<div align="center">
+
 # Telegram Business Assistant
 
-[![Python 3.13](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![aiogram 3](https://img.shields.io/badge/aiogram-3.19-26A5E4?logo=telegram&logoColor=white)](https://aiogram.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+### All-in-One Telegram Bot Platform for Service Businesses
 
-**An all-in-one Telegram bot platform for small businesses** -- salons, clinics, studios, and service providers. Customers book appointments, ask questions, and receive notifications directly in Telegram, while business owners manage everything through a modern admin panel.
+[![CI/CD](https://github.com/AndrewSheff/telegram-business-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/AndrewSheff/telegram-business-assistant/actions)
+[![Python 3.13](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript 6](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![aiogram 3](https://img.shields.io/badge/aiogram-3.19-26A5E4?logo=telegram&logoColor=white)](https://aiogram.dev)
+[![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docker.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+**Turn Telegram into a complete business management platform.**
+Customers book appointments, ask questions, and get reminders directly in Telegram. Business owners manage everything through a modern admin panel with AI-powered chat, CRM, broadcasts, and analytics.
+
+[Quick Start](#-quick-start) &bull; [Features](#-features) &bull; [Architecture](#-architecture) &bull; [API](#-api-documentation) &bull; [Bot Commands](#-telegram-bot-commands)
+
+</div>
 
 ---
 
-## Features
+## The Problem
 
-- **Online Booking** -- Customers browse services, pick a date and time slot, and confirm appointments without leaving Telegram.
-- **AI Assistant** -- Powered by Claude or GPT, the bot answers frequently asked questions using a configurable knowledge base. When it cannot help, it hands the conversation off to a human operator.
-- **Live Chat with Handoff** -- Operators can take over any conversation from the admin panel in real time.
-- **Broadcast Messaging** -- Send targeted announcements and promotions to all subscribers with scheduled delivery and rate-limited sending.
-- **Client CRM** -- Automatic client profiles built from Telegram interactions, with booking history and conversation logs.
-- **Schedule Management** -- Define weekly working hours, lunch breaks, and per-day exceptions (holidays, sick days).
-- **Service Catalog** -- Organize services into categories with duration, price, and descriptions.
-- **FAQ Management** -- Maintain a structured FAQ that the bot references before falling back to AI generation.
-- **Knowledge Base** -- Upload text blocks that the AI assistant uses as context for answering questions.
-- **Dashboard & Analytics** -- At-a-glance metrics: bookings today, new clients, revenue, and trend charts.
-- **Multi-User Access** -- Role-based access control (owner, admin, operator) for the admin panel.
-- **Automated Reminders** -- Background scheduler sends booking confirmations and upcoming appointment reminders.
+> Service businesses (salons, clinics, studios) spend **3-5 hours daily** answering the same questions, managing appointments manually, and chasing no-shows. Clients call, wait on hold, and leave. **40% of bookings** happen outside business hours when nobody picks up the phone.
+
+**Telegram Business Assistant** solves this with a single platform that works 24/7: an AI-powered Telegram bot handles bookings and questions, while operators manage everything from a web admin panel. When the bot can't answer, it seamlessly hands the conversation to a human.
+
+**Key metrics:**
+- 16,800+ lines of production-ready code
+- 55 API endpoints with Swagger documentation
+- 14 database models with Alembic migrations
+- 16 admin panel pages
+- 48 automated tests
+- CI/CD pipeline with GitHub Actions
+- Docker Compose: one command to deploy
 
 ---
 
@@ -43,51 +52,43 @@
 
 ---
 
-## Tech Stack
+## Features
 
-### Backend
+### Online Booking via Telegram
+Customers browse services, pick a date and available time slot, and confirm appointments without leaving Telegram. FSM-based booking flow with conflict detection and `SELECT FOR UPDATE` locking to prevent double-bookings.
 
-| Component | Technology |
-|-----------|------------|
-| Framework | FastAPI 0.115 |
-| Language | Python 3.13 |
-| ORM | SQLAlchemy 2.0 (async) |
-| Database driver | asyncpg |
-| Migrations | Alembic |
-| Validation | Pydantic v2 |
-| Auth | JWT (python-jose) + bcrypt |
-| Telegram Bot | aiogram 3.19 |
-| Task scheduler | APScheduler 3.11 |
-| AI providers | Anthropic SDK, OpenAI SDK |
-| Rate limiting | SlowAPI |
-| Logging | structlog |
-| HTTP client | httpx |
+### AI Assistant with Handoff
+Powered by **Claude** or **GPT**, the bot answers customer questions using the business knowledge base and FAQ. It detects when it can't help and offers to connect the customer with a live operator. All context is preserved during handoff.
 
-### Frontend
+### Live Chat & Operator Panel
+Real-time chat interface in the admin panel. Operators see all active conversations, unread counts, and can take over from the AI at any point. Supports multiple operators with role-based access.
 
-| Component | Technology |
-|-----------|------------|
-| Framework | React 19 |
-| Language | TypeScript 6.0 |
-| Build tool | Vite 8 |
-| Styling | Tailwind CSS 4 |
-| UI components | shadcn/ui 4 |
-| Data fetching | TanStack React Query 5 |
-| HTTP client | Axios |
-| Charts | Recharts 3 |
-| Routing | React Router 7 |
-| Icons | Lucide React |
-| Linter | oxlint |
+### Broadcast Messaging
+Send targeted announcements to all subscribers with rate-limited delivery (respects Telegram API limits). Track delivery stats, view per-message logs, and schedule campaigns.
 
-### Infrastructure
+### Built-in CRM
+Automatic client profiles from Telegram interactions. View booking history, conversation logs, and client details. Search and filter by name, phone, or Telegram username.
 
-| Component | Technology |
-|-----------|------------|
-| Containerization | Docker Compose |
-| Reverse proxy | Nginx (Alpine) |
-| Database | PostgreSQL 16 (Alpine) |
-| Cache / message broker | Redis 7 (Alpine) |
-| CI/CD | GitHub Actions |
+### Schedule Management
+Define weekly working hours with lunch breaks. Override specific dates for holidays, sick days, or special hours. The booking bot automatically shows only available time slots.
+
+### Service Catalog
+Organize services into categories with duration, price, and descriptions. Services feed directly into the Telegram booking flow and admin analytics.
+
+### FAQ & Knowledge Base
+Structured FAQ with categories that the bot checks before calling the AI. Separate knowledge base blocks for detailed context the AI uses when generating answers.
+
+### Dashboard & Analytics
+Real-time metrics: bookings today, new clients this week, total revenue. Activity charts (7d/30d), popular services, and booking status distribution.
+
+### Automated Reminders
+APScheduler sends booking confirmations, 24-hour reminders, and 2-hour reminders. Automatic no-show detection for past bookings without confirmation.
+
+### Multi-User Access
+Role-based access control: **Owner** (full access), **Operator** (chat and bookings). Owner manages users, settings, and broadcasts; operators focus on client interactions.
+
+### Enterprise Security
+JWT authentication with bcrypt password hashing. Forced password change on first login. Rate limiting on auth endpoints. Request ID tracing and structured JSON logging.
 
 ---
 
@@ -96,96 +97,137 @@
 ```
                           +------------------+
                           |     Nginx:80     |
+                          |  Reverse Proxy   |
                           +--------+---------+
                                    |
                     +--------------+--------------+
                     |                             |
             +-------+-------+           +--------+--------+
             | Frontend:3000 |           |  Backend:8000   |
-            |  React SPA    |           |  FastAPI + Bot  |
+            |  React 19 SPA |           |  FastAPI + Bot  |
             +---------------+           +---+----+----+---+
                                             |    |    |
                               +-------------+    |    +-----------+
                               |                  |                |
                      +--------+---+    +---------+----+    +------+------+
-                     | PostgreSQL |    |    Redis     |    | Telegram    |
-                     |   :5432    |    |    :6379     |    | Bot API     |
-                     +------------+    +--------------+    +------+------+
-                                                                  |
+                     | PostgreSQL |    |    Redis     |    |  Telegram   |
+                     |   :5432    |    |    :6379     |    |  Bot API    |
+                     |  14 models |    |  Rate Limit  |    +------+------+
+                     +------------+    +--------------+           |
                                                            +------+------+
-                                                           |  APScheduler|
-                                                           |  Reminders  |
-                                                           |  Broadcasts |
+                                                           | APScheduler |
+                                                           | Reminders   |
+                                                           | Broadcasts  |
                                                            +-------------+
 ```
+
+### How the Bot Works
+
+```
+Customer sends message in Telegram
+        |
+        v
+  [aiogram handler]
+        |
+        +---> /book    --> FSM: select service -> date -> time -> confirm
+        +---> /faq     --> Show FAQ categories and answers
+        +---> /services --> Display service catalog
+        +---> /my_bookings --> List & cancel bookings
+        +---> free text --> AI pipeline:
+                              1. Check FAQ for exact match
+                              2. Build context (schedule, services, knowledge base)
+                              3. Call Claude/GPT with full context
+                              4. If AI uncertain --> offer handoff to operator
+                              5. Operator takes over in admin panel
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| **Backend** | Python, FastAPI, SQLAlchemy (async), Alembic | 3.13, 0.115, 2.0 |
+| **Telegram Bot** | aiogram, APScheduler | 3.19, 3.11 |
+| **Frontend** | React, TypeScript, Vite, TailwindCSS, shadcn/ui | 19, 6.0, 8, v4 |
+| **Database** | PostgreSQL | 16 |
+| **Cache** | Redis | 7 |
+| **AI** | Anthropic Claude, OpenAI GPT | Latest |
+| **Auth** | JWT (python-jose) + bcrypt | HS256 |
+| **Infra** | Docker Compose, Nginx, GitHub Actions | Multi-stage |
+| **Logging** | structlog (JSON) | Request tracing |
+| **Testing** | Pytest (async), 48 tests | 10 test files |
 
 ---
 
 ## Quick Start
 
 ### Prerequisites
+- Docker & Docker Compose v2+
+- Telegram bot token from [@BotFather](https://t.me/BotFather)
+- (Optional) Anthropic or OpenAI API key for AI chat
 
-- Docker and Docker Compose v2+
-- A Telegram bot token from [@BotFather](https://t.me/BotFather)
-- (Optional) Anthropic or OpenAI API key for the AI assistant
-
-### 1. Clone the repository
+### 1. Clone and configure
 
 ```bash
-git clone https://github.com/your-org/telegram-business-assistant.git
+git clone https://github.com/AndrewSheff/telegram-business-assistant.git
 cd telegram-business-assistant
-```
-
-### 2. Configure environment variables
-
-```bash
 cp .env.example .env
 ```
 
-Edit `.env` and set at minimum:
+Edit `.env`:
 
-```dotenv
+```env
 TELEGRAM_BOT_TOKEN=123456:ABC-DEF...
-SECRET_KEY=change-me-to-a-random-32-char-string
+SECRET_KEY=your-random-32-char-secret-key-here
 ADMIN_EMAIL=admin@yourcompany.com
-ADMIN_DEFAULT_PASSWORD=YourSecurePassword
+ADMIN_DEFAULT_PASSWORD=SecurePass123
+ANTHROPIC_API_KEY=sk-ant-...       # optional, for AI chat
 ```
 
-### 3. Start the application
+### 2. Launch
 
 ```bash
 docker compose up -d
 ```
 
-The application will be available at `http://localhost`. Log in to the admin panel with the credentials defined in `.env`.
+### 3. Access
 
-### 4. Verify the deployment
+| Service | URL |
+|---------|-----|
+| Admin Panel | http://localhost |
+| API Docs (Swagger) | http://localhost/docs |
+| Health Check | http://localhost/api/v1/health |
 
-```bash
-curl http://localhost/api/v1/health
-```
+Login with admin credentials from `.env`. You'll be prompted to change the password on first login.
+
+### 4. Configure the bot
+
+Go to **Settings** in the admin panel. Set your business name, working hours, and add services. The Telegram bot will automatically use this data for bookings and AI answers.
 
 ---
 
 ## API Documentation
 
-Interactive API documentation is available at `/docs` (Swagger UI) after starting the application.
+Interactive Swagger documentation at `/docs`. **55 endpoints** across 13 groups:
 
-| Endpoint Group | Prefix | Description |
-|----------------|--------|-------------|
-| Auth | `/api/v1/auth` | Login, token refresh, password change |
-| Dashboard | `/api/v1/dashboard` | Aggregated metrics and statistics |
-| Services | `/api/v1/services` | Service catalog CRUD with categories |
-| Schedule | `/api/v1/schedule` | Weekly hours and per-day exceptions |
-| Bookings | `/api/v1/bookings` | Booking management, status transitions |
-| Clients | `/api/v1/clients` | Client profiles and history |
-| FAQ | `/api/v1/faq` | Frequently asked questions CRUD |
-| Knowledge | `/api/v1/knowledge` | AI knowledge base blocks |
-| Broadcasts | `/api/v1/broadcasts` | Mass messaging campaigns |
-| Chat | `/api/v1/chat` | Live chat, conversation list, handoff |
-| Settings | `/api/v1/settings` | Business profile and bot configuration |
-| Users | `/api/v1/users` | Admin user management and roles |
-| Health | `/api/v1/health` | Liveness and readiness probes |
+| Group | Prefix | Description |
+|-------|--------|-------------|
+| **Auth** | `/api/v1/auth` | Login, password change, token refresh |
+| **Dashboard** | `/api/v1/dashboard` | Aggregated metrics and charts |
+| **Services** | `/api/v1/services` | Service catalog CRUD with categories |
+| **Schedule** | `/api/v1/schedule` | Weekly hours and day exceptions |
+| **Bookings** | `/api/v1/bookings` | Booking management, status transitions |
+| **Clients** | `/api/v1/clients` | Client profiles and booking history |
+| **FAQ** | `/api/v1/faq` | FAQ CRUD with categories |
+| **Knowledge** | `/api/v1/knowledge` | AI knowledge base blocks |
+| **Broadcasts** | `/api/v1/broadcasts` | Mass messaging campaigns |
+| **Chat** | `/api/v1/chat` | Live chat, conversations, handoff |
+| **Settings** | `/api/v1/settings` | Business profile configuration |
+| **Users** | `/api/v1/users` | Admin user management and roles |
+| **Health** | `/api/v1/health` | Liveness and readiness probes |
+
+All endpoints use Pydantic v2 validation, structured error responses, and rate limiting.
 
 ---
 
@@ -200,7 +242,49 @@ Interactive API documentation is available at `/docs` (Swagger UI) after startin
 | `/faq` | View frequently asked questions |
 | `/help` | Show available commands |
 
-Users can also send free-text messages at any time. The AI assistant will attempt to answer using the knowledge base and FAQ. If it cannot provide a satisfactory response, it offers to connect the user with a human operator.
+Users can send free-text messages at any time. The AI assistant answers using the knowledge base and FAQ. If it can't help, it offers to connect with a human operator.
+
+---
+
+## Project Structure
+
+```
+telegram-business-assistant/
+├── backend/
+│   ├── app/
+│   │   ├── main.py                  # FastAPI app with lifespan
+│   │   ├── config.py                # Pydantic settings from .env
+│   │   ├── database.py              # Async SQLAlchemy engine
+│   │   ├── api/v1/                  # 13 REST API routers
+│   │   ├── bot/                     # Telegram bot module
+│   │   │   ├── bot.py               # Bot instance and polling
+│   │   │   ├── middlewares.py        # DB session middleware
+│   │   │   ├── handlers/            # FSM handlers (booking, chat, FAQ)
+│   │   │   ├── keyboards/           # Inline and reply keyboards
+│   │   │   └── states/              # FSM state groups
+│   │   ├── models/                  # 14 SQLAlchemy models
+│   │   ├── schemas/                 # Pydantic v2 schemas
+│   │   ├── services/                # Business logic layer
+│   │   ├── tasks/                   # APScheduler jobs
+│   │   └── core/                    # Security, logging, exceptions
+│   ├── tests/                       # 48 pytest tests (10 files)
+│   ├── Dockerfile                   # Multi-stage build
+│   └── entrypoint.sh                # Migrations + server
+├── frontend/
+│   ├── src/
+│   │   ├── api/                     # Axios clients with JWT interceptor
+│   │   ├── hooks/                   # React Query custom hooks
+│   │   ├── contexts/                # Auth context provider
+│   │   ├── components/              # UI components (layout, shared)
+│   │   ├── pages/                   # 16 page components
+│   │   ├── types/                   # TypeScript interfaces
+│   │   └── lib/                     # Utilities
+│   └── Dockerfile                   # Node build + Nginx serve
+├── docker/nginx/                    # Reverse proxy config
+├── .github/workflows/               # CI (lint + test + build)
+├── docker-compose.yml               # 5 services with health checks
+└── .env.example
+```
 
 ---
 
@@ -209,173 +293,64 @@ Users can also send free-text messages at any time. The AI assistant will attemp
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `TELEGRAM_BOT_TOKEN` | Yes | -- | Bot token from @BotFather |
-| `SECRET_KEY` | Yes | -- | JWT signing key (min 32 characters) |
-| `DATABASE_URL` | No | `postgresql+asyncpg://postgres:postgres@postgres:5432/tg_business_bot` | PostgreSQL connection string |
-| `POSTGRES_PASSWORD` | No | `postgres` | PostgreSQL password |
-| `REDIS_URL` | No | `redis://redis:6379/0` | Redis connection string |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | No | `30` | JWT token lifetime |
-| `ADMIN_EMAIL` | No | `admin@company.com` | Initial owner account email |
-| `ADMIN_NAME` | No | `Admin` | Initial owner account name |
-| `ADMIN_DEFAULT_PASSWORD` | No | `ChangeMe123` | Initial owner account password |
+| `SECRET_KEY` | Yes | -- | JWT signing key (min 32 chars) |
+| `ADMIN_EMAIL` | No | `admin@company.com` | Initial owner email |
+| `ADMIN_DEFAULT_PASSWORD` | No | -- | Initial owner password |
+| `DATABASE_URL` | No | Auto-configured | PostgreSQL async connection |
+| `REDIS_URL` | No | Auto-configured | Redis connection |
 | `ANTHROPIC_API_KEY` | No | -- | Anthropic API key for Claude |
 | `OPENAI_API_KEY` | No | -- | OpenAI API key for GPT |
-| `LOG_LEVEL` | No | `INFO` | Application log level |
-| `CORS_ORIGINS` | No | `["http://localhost:3000","http://localhost"]` | Allowed CORS origins (JSON array) |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | No | `30` | JWT token lifetime |
+| `LOG_LEVEL` | No | `INFO` | Logging verbosity |
+| `CORS_ORIGINS` | No | `localhost` | Allowed CORS origins |
 | `TIMEZONE` | No | `UTC` | Business timezone |
-
----
-
-## Project Structure
-
-```
-telegram-business-assistant/
-|-- docker-compose.yml
-|-- .env.example
-|-- LICENSE
-|-- backend/
-|   |-- requirements.txt
-|   |-- Dockerfile
-|   |-- app/
-|   |   |-- main.py                  # FastAPI application entry point
-|   |   |-- config.py                # Pydantic settings
-|   |   |-- database.py              # Async SQLAlchemy engine & session
-|   |   |-- api/v1/                  # REST API routers
-|   |   |   |-- auth.py
-|   |   |   |-- bookings.py
-|   |   |   |-- broadcasts.py
-|   |   |   |-- chat.py
-|   |   |   |-- clients.py
-|   |   |   |-- dashboard.py
-|   |   |   |-- faq.py
-|   |   |   |-- health.py
-|   |   |   |-- knowledge.py
-|   |   |   |-- schedule.py
-|   |   |   |-- services_mgmt.py
-|   |   |   |-- settings.py
-|   |   |   +-- users.py
-|   |   |-- bot/                     # Telegram bot module
-|   |   |   |-- bot.py               # Bot instance and webhook setup
-|   |   |   |-- middlewares.py        # DB session middleware for handlers
-|   |   |   |-- handlers/            # Conversation handlers
-|   |   |   |   |-- start.py
-|   |   |   |   |-- booking.py       # FSM-based booking flow
-|   |   |   |   |-- my_bookings.py
-|   |   |   |   |-- services.py
-|   |   |   |   |-- faq.py
-|   |   |   |   |-- ai_chat.py       # AI responses + human handoff
-|   |   |   |   +-- handoff.py
-|   |   |   |-- keyboards/           # Inline and reply keyboards
-|   |   |   +-- states/              # FSM state groups
-|   |   |-- models/                  # SQLAlchemy ORM models
-|   |   |-- schemas/                 # Pydantic v2 request/response schemas
-|   |   |-- services/                # Business logic layer
-|   |   |-- tasks/                   # Background jobs
-|   |   |   |-- scheduler.py         # APScheduler configuration
-|   |   |   |-- reminders.py         # Booking reminder jobs
-|   |   |   +-- broadcast_sender.py  # Rate-limited broadcast queue
-|   |   +-- core/                    # Security, dependencies, exceptions
-|   +-- tests/                       # 48 pytest tests
-|       |-- conftest.py
-|       |-- test_auth.py
-|       |-- test_bookings.py
-|       |-- test_bot_handlers.py
-|       +-- ...
-|-- frontend/
-|   |-- package.json
-|   |-- Dockerfile
-|   |-- src/
-|   |   |-- main.tsx
-|   |   |-- App.tsx
-|   |   |-- api/                     # Axios API clients
-|   |   |-- hooks/                   # React Query hooks
-|   |   |-- contexts/                # Auth context provider
-|   |   |-- components/              # Shared UI components
-|   |   |-- pages/                   # Route page components
-|   |   |   |-- LoginPage.tsx
-|   |   |   |-- DashboardPage.tsx
-|   |   |   |-- BookingsPage.tsx
-|   |   |   |-- ServicesPage.tsx
-|   |   |   |-- SchedulePage.tsx
-|   |   |   |-- ClientsPage.tsx
-|   |   |   |-- ClientDetailPage.tsx
-|   |   |   |-- ChatPage.tsx
-|   |   |   |-- BroadcastsPage.tsx
-|   |   |   |-- FaqPage.tsx
-|   |   |   |-- KnowledgePage.tsx
-|   |   |   |-- SettingsPage.tsx
-|   |   |   |-- UsersPage.tsx
-|   |   |   +-- ...
-|   |   |-- types/                   # TypeScript type definitions
-|   |   +-- lib/                     # Utilities and constants
-|   +-- ...
-+-- docker/
-    +-- nginx/
-        +-- nginx.conf               # Reverse proxy configuration
-```
 
 ---
 
 ## Development
 
-### Running the backend locally
+### Backend
 
 ```bash
 cd backend
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# Start PostgreSQL and Redis (use Docker or local instances)
 docker compose up -d postgres redis
-
-export DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/tg_business_bot
-export REDIS_URL=redis://localhost:6379/0
-export SECRET_KEY=dev-secret-key-change-in-production
-export TELEGRAM_BOT_TOKEN=your-token-here
-
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --port 8000
 ```
 
-### Running the frontend locally
+### Frontend
 
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run dev    # http://localhost:5173
 ```
 
-The dev server starts at `http://localhost:5173` with hot module replacement.
+### Testing
+
+```bash
+cd backend && pytest tests/ -v
+```
+
+48 tests across 10 files covering auth, bookings, bot handlers, broadcasts, scheduling, clients, and AI service.
 
 ### Linting
 
 ```bash
-# Backend
-cd backend && ruff check .
-
-# Frontend
-cd frontend && npm run lint
-```
-
----
-
-## Testing
-
-The project includes 48 tests covering authentication, booking logic, bot handlers, broadcasts, scheduling, and AI service integration.
-
-```bash
-cd backend
-pip install pytest pytest-asyncio httpx
-pytest -v
+ruff check backend/             # Python
+cd frontend && npm run lint     # TypeScript (oxlint)
+npx tsc --noEmit                # Type check
 ```
 
 ---
 
 ## Bot Setup
 
-1. Open Telegram and message [@BotFather](https://t.me/BotFather).
-2. Send `/newbot` and follow the prompts to choose a name and username.
-3. Copy the token and set it as `TELEGRAM_BOT_TOKEN` in your `.env` file.
-4. (Optional) Send `/setcommands` to BotFather and paste:
+1. Message [@BotFather](https://t.me/BotFather) in Telegram and send `/newbot`
+2. Copy the token and set `TELEGRAM_BOT_TOKEN` in `.env`
+3. (Optional) Send `/setcommands` to BotFather:
    ```
    book - Book an appointment
    my_bookings - View my bookings
@@ -383,10 +358,10 @@ pytest -v
    faq - Frequently asked questions
    help - Show available commands
    ```
-5. Start the application with `docker compose up -d`. The bot will begin polling for updates automatically.
+4. Start the app with `docker compose up -d` -- the bot begins polling automatically
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+[MIT](LICENSE) -- free for commercial use.

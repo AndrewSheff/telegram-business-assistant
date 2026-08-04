@@ -46,7 +46,8 @@ async def lifespan(app: FastAPI):
     logger.info("app_starting", version="1.0.0")
 
     # Проверяем что SECRET_KEY был изменен — дефолтный = дыра в безопасности
-    if settings.SECRET_KEY == "change-me-to-a-random-32-char-string":  # noqa: S105
+    from app.config import _DEV_SECRET
+    if settings.SECRET_KEY == _DEV_SECRET:
         logger.warning(
             "insecure_secret_key",
             msg="SECRET_KEY не изменен! Используется дефолтное значение. "
