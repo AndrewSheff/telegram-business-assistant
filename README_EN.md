@@ -24,7 +24,7 @@
 
 **Customers book appointments in Telegram. AI answers questions 24/7. Owners manage everything from a web admin panel.**
 
-[Quick Start](#-quick-start) · [Features](#-features) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [API](#-api-documentation)
+[Quick Start](#quick-start) · [Features](#features) · [Screenshots](#screenshots) · [Architecture](#architecture) · [API](#api-documentation)
 
 </div>
 
