@@ -6,9 +6,10 @@
 
 <div align="center">
 
+> **[English version](README_EN.md)**
+
 # Telegram Business Assistant
 
-### All-in-One Bot Platform for Service Businesses
 ### Бот-платформа для сервисного бизнеса
 
 [![CI/CD](https://github.com/AndrewSheff/telegram-business-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/AndrewSheff/telegram-business-assistant/actions)
@@ -21,74 +22,70 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**Customers book appointments in Telegram. AI answers questions 24/7. Owners manage everything from a web admin panel.**
-
 **Клиенты записываются через Telegram. AI отвечает на вопросы 24/7. Владельцы управляют всем из веб-панели.**
 
-[Quick Start](#-quick-start) · [Features](#-features) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [API](#-api-documentation)
+[Быстрый старт](#-быстрый-старт) · [Возможности](#-возможности) · [Скриншоты](#-скриншоты) · [Архитектура](#-архитектура) · [API](#-api-документация)
 
 </div>
 
 ---
 
-> **The Problem:** Service businesses spend 3-5 hours daily on manual appointment management. 40% of bookings happen outside business hours when nobody picks up the phone. 20-35% of appointments end in no-shows without reminders.
+> **Проблема:** Сервисный бизнес тратит 3-5 часов в день на ручное управление записями. 40% бронирований приходится на нерабочее время, когда никто не берет трубку. 20-35% записей заканчиваются неявкой без напоминаний.
 
-> **Проблема:** Сервисный бизнес тратит 3-5 часов в день на ручное управление записями. 40% бронирований приходится на нерабочее время. 20-35% записей заканчиваются неявкой без напоминаний.
-
-**Telegram Business Assistant** turns Telegram into a complete business management platform — customers book services, ask questions, and get reminders directly in the messenger, while owners run operations through a modern admin panel with CRM, analytics, and broadcasts.
+**Telegram Business Assistant** превращает Telegram в полноценную платформу для управления бизнесом — клиенты записываются на услуги, задают вопросы и получают напоминания прямо в мессенджере, а владельцы ведут операционку через современную админ-панель с CRM, аналитикой и рассылками.
 
 <div align="center">
 
-| Lines of Code | API Endpoints | DB Models | Admin Pages | Tests | Docker Services |
+| Строк кода | Эндпоинтов API | Моделей БД | Страниц админки | Тестов | Сервисов Docker |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| **16,800+** | **55** | **14** | **16** | **48** | **5** |
+| **16 800+** | **55** | **14** | **16** | **48** | **5** |
 
 </div>
 
 ---
 
-## Screenshots
+## Скриншоты
 
-| Dashboard | Live Chat |
-|:---------:|:---------:|
+| Дашборд | Чат с клиентом |
+|:-------:|:--------------:|
 | ![Dashboard](screenshots/dashboard.png) | ![Chat](screenshots/chat.png) |
 
 ---
 
-## Features
+## Возможности
 
-**Online Booking via Telegram** — customers browse services, pick a date and time slot, and confirm — without leaving Telegram. FSM-based flow with `SELECT FOR UPDATE` locking to prevent double-bookings.
+**Онлайн-запись через Telegram** — клиент выбирает услугу, дату и время и подтверждает запись, не покидая мессенджер. Процесс построен на FSM с блокировкой `SELECT FOR UPDATE` для защиты от двойных бронирований.
 
-**AI Assistant with Handoff** — Claude or GPT answers questions using the business knowledge base. When the AI can't help, it seamlessly hands the conversation to a live operator with full context preserved.
+**AI-ассистент с передачей оператору** — Claude или GPT отвечает на вопросы на основе базы знаний бизнеса. Если AI не справляется, разговор плавно передаетcя живому оператору с сохранением всего контекста.
 
-**Live Chat & Operator Panel** — real-time chat interface in the admin panel. Operators see active conversations, unread counts, and can take over from AI at any point.
+**Живой чат и панель оператора** — интерфейс чата в реальном времени в админ-панели. Операторы видят активные диалоги, счетчики непрочитанных и могут в любой момент подключиться вместо AI.
 
-**Broadcast Messaging** — send targeted announcements to all subscribers with rate-limited delivery (respects Telegram API limits). Track delivery stats per message.
+**Рассылки** — отправка целевых объявлений всем подписчикам с ограничением скорости доставки (с учетом лимитов Telegram API). Статистика доставки по каждому сообщению.
 
-**Built-in CRM** — automatic client profiles from Telegram interactions. Booking history, conversation logs, search and filtering by name, phone, or username.
+**Встроенная CRM** — автоматические профили клиентов из Telegram-взаимодействий. История записей, журнал переписки, поиск и фильтрация по имени, телефону или username.
 
-**Schedule Management** — weekly working hours with lunch breaks. Date-specific overrides for holidays. The bot automatically shows only available time slots.
+**Управление расписанием** — недельные рабочие часы с перерывами на обед. Переопределения для конкретных дат и праздников. Бот автоматически показывает только доступные слоты.
 
-**Service Catalog** — services organized by categories with duration, price, and descriptions. Feeds directly into Telegram booking flow and admin analytics.
+**Каталог услуг** — услуги, организованные по категориям, с длительностью, ценой и описанием. Напрямую используется в боте при записи и в аналитике.
 
-**FAQ & Knowledge Base** — structured FAQ with categories (checked before AI). Separate knowledge base blocks for detailed AI context.
+**FAQ и база знаний** — структурированные вопросы-ответы по категориям (проверяются до обращения к AI). Отдельные блоки базы знаний для расширенного контекста AI.
 
-**Dashboard & Analytics** — real-time metrics: bookings, new clients, revenue. Activity charts (7d/30d), popular services, booking status distribution.
+**Дашборд и аналитика** — метрики в реальном времени: записи, новые клиенты, выручка. Графики активности (7д/30д), популярные услуги, распределение статусов записей.
 
-**Automated Reminders** — APScheduler sends booking confirmations, 24-hour reminders, and 2-hour reminders. Automatic no-show detection.
+**Автоматические напоминания** — APScheduler отправляет подтверждения записи, напоминания за 24 часа и за 2 часа. Автоматическое выявление неявок.
 
-**Multi-User Access** — Owner (full access) and Operator (chat and bookings) roles. Forced password change on first login.
+**Мультипользовательский доступ** — роли Владелец (полный доступ) и Оператор (чат и записи). Обязательная смена пароля при первом входе.
 
-**Enterprise Security** — JWT + bcrypt, rate limiting on auth endpoints, request ID tracing, structured JSON logging.
+**Корпоративная безопасность** — JWT + bcrypt, rate limiting на эндпоинтах авторизации, трассировка по request ID, структурированное JSON-логирование.
 
 ---
 
-## Architecture
+## Архитектура
 
 ```
                       +------------------+
                       |     Nginx :80    |
-                      |  Reverse Proxy   |
+                      |  Обратный прокси |
                       +--------+---------+
                                |
                 +--------------+--------------+
@@ -103,45 +100,45 @@
                  +--------+---+    +---------+----+    +------+------+
                  | PostgreSQL |    |    Redis     |    |  Telegram   |
                  |   :5432    |    |    :6379     |    |  Bot API    |
-                 |  14 models |    |  Rate Limit  |    +------+------+
+                 |  14 моделей|    | Rate Limit   |    +------+------+
                  +------------+    +--------------+           |
                                                        +------+------+
                                                        | APScheduler |
-                                                       | Reminders   |
-                                                       | Broadcasts  |
+                                                       | Напоминания |
+                                                       | Рассылки    |
                                                        +-------------+
 ```
 
-### Bot Flow
+### Поток обработки сообщений бота
 
 ```
-Customer message in Telegram
+Сообщение клиента в Telegram
         |
         v
-  [aiogram handler]
+  [обработчик aiogram]
         |
-        +---> /book       --> FSM: service -> date -> time -> confirm
-        +---> /faq        --> FAQ categories and answers
-        +---> /services   --> Service catalog with prices
-        +---> /my_bookings --> List & cancel upcoming
-        +---> free text   --> AI pipeline:
-                                1. Check FAQ for match
-                                2. Build context (schedule, services, KB)
-                                3. Call Claude/GPT
-                                4. If uncertain --> offer handoff
-                                5. Operator takes over in admin panel
+        +---> /book       --> FSM: услуга -> дата -> время -> подтверждение
+        +---> /faq        --> категории и ответы FAQ
+        +---> /services   --> каталог услуг с ценами
+        +---> /my_bookings --> список и отмена предстоящих записей
+        +---> свободный текст --> AI-конвейер:
+                                1. Проверка совпадения в FAQ
+                                2. Сборка контекста (расписание, услуги, база знаний)
+                                3. Вызов Claude/GPT
+                                4. При неуверенности --> предложение передать оператору
+                                5. Оператор подключается через админ-панель
 ```
 
 ---
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
+### Требования
 - Docker & Docker Compose v2+
-- Telegram bot token from [@BotFather](https://t.me/BotFather)
-- (Optional) Anthropic or OpenAI API key for AI chat
+- Токен Telegram-бота от [@BotFather](https://t.me/BotFather)
+- (Опционально) API-ключ Anthropic или OpenAI для AI-чата
 
-### 1. Clone and configure
+### 1. Клонирование и настройка
 
 ```bash
 git clone https://github.com/AndrewSheff/telegram-business-assistant.git
@@ -149,74 +146,74 @@ cd telegram-business-assistant
 cp .env.example .env
 ```
 
-Edit `.env`:
+Отредактируй `.env`:
 
 ```env
-TELEGRAM_BOT_TOKEN=123456:ABC-DEF...     # required
-SECRET_KEY=your-random-32-char-string    # required
+TELEGRAM_BOT_TOKEN=123456:ABC-DEF...     # обязательно
+SECRET_KEY=your-random-32-char-string    # обязательно
 ADMIN_EMAIL=admin@yourcompany.com
 ADMIN_DEFAULT_PASSWORD=SecurePass123
-ANTHROPIC_API_KEY=sk-ant-...             # optional, for AI chat
+ANTHROPIC_API_KEY=sk-ant-...             # опционально, для AI-чата
 ```
 
-### 2. Launch
+### 2. Запуск
 
 ```bash
 docker compose up -d
 ```
 
-### 3. Access
+### 3. Доступ
 
-| Service | URL |
-|:--------|:----|
-| Admin Panel | http://localhost |
-| API Docs (Swagger) | http://localhost/docs |
-| Health Check | http://localhost/api/v1/health |
+| Сервис | URL |
+|:-------|:----|
+| Админ-панель | http://localhost |
+| Документация API (Swagger) | http://localhost/docs |
+| Проверка работоспособности | http://localhost/api/v1/health |
 
-Login with admin credentials from `.env`. Change password on first login, then configure your business in **Settings**.
+Войди с учетными данными администратора из `.env`. При первом входе смени пароль, затем настрой свой бизнес в разделе **Настройки**.
 
 ---
 
-## Tech Stack
+## Технологии
 
-| Layer | Technology | Version |
-|:------|:-----------|:--------|
+| Слой | Технология | Версия |
+|:-----|:-----------|:-------|
 | **Backend** | Python, FastAPI, SQLAlchemy (async), Alembic | 3.13, 0.115, 2.0 |
 | **Telegram** | aiogram, APScheduler | 3.19, 3.11 |
 | **Frontend** | React, TypeScript, Vite, TailwindCSS, shadcn/ui | 19, 5+, 6, v4 |
-| **Database** | PostgreSQL | 16 |
-| **Cache** | Redis | 7 |
+| **База данных** | PostgreSQL | 16 |
+| **Кеш** | Redis | 7 |
 | **AI** | Anthropic Claude, OpenAI GPT | Latest |
-| **Auth** | JWT (python-jose) + bcrypt | HS256 |
-| **Infra** | Docker Compose, Nginx, GitHub Actions CI/CD | Multi-stage |
-| **Logging** | structlog (JSON) | Request tracing |
-| **Testing** | Pytest (async) | 48 tests, 10 files |
+| **Авторизация** | JWT (python-jose) + bcrypt | HS256 |
+| **Инфраструктура** | Docker Compose, Nginx, GitHub Actions CI/CD | Multi-stage |
+| **Логирование** | structlog (JSON) | Трассировка запросов |
+| **Тестирование** | Pytest (async) | 48 тестов, 10 файлов |
 
 ---
 
-## API Documentation
+## API документация
 
-Interactive Swagger at `/docs`. **55 endpoints** across 13 groups:
+Интерактивный Swagger по адресу `/docs`. **55 эндпоинтов** в 13 группах:
 
-| Group | Prefix | Endpoints |
-|:------|:-------|:----------|
-| Auth | `/api/v1/auth` | Login, password change, token refresh |
-| Dashboard | `/api/v1/dashboard` | Aggregated metrics and charts |
-| Services | `/api/v1/services` | Service catalog CRUD with categories |
-| Schedule | `/api/v1/schedule` | Weekly hours and day exceptions |
-| Bookings | `/api/v1/bookings` | Management, status transitions |
-| Clients | `/api/v1/clients` | Profiles and booking history |
-| FAQ | `/api/v1/faq` | FAQ CRUD with categories |
-| Knowledge | `/api/v1/knowledge` | AI knowledge base blocks |
-| Broadcasts | `/api/v1/broadcasts` | Mass messaging campaigns |
-| Chat | `/api/v1/chat` | Live chat, conversations, handoff |
-| Settings | `/api/v1/settings` | Business profile configuration |
-| Users | `/api/v1/users` | Admin user management and roles |
-| Health | `/api/v1/health` | Liveness and readiness probes |
+| Группа | Префикс | Эндпоинты |
+|:-------|:--------|:----------|
+| Авторизация | `/api/v1/auth` | Вход, смена пароля, обновление токена |
+| Дашборд | `/api/v1/dashboard` | Агрегированные метрики и графики |
+| Услуги | `/api/v1/services` | CRUD каталога услуг с категориями |
+| Расписание | `/api/v1/schedule` | Рабочие часы и исключения по датам |
+| Записи | `/api/v1/bookings` | Управление, смена статусов |
+| Клиенты | `/api/v1/clients` | Профили и история записей |
+| FAQ | `/api/v1/faq` | CRUD FAQ с категориями |
+| База знаний | `/api/v1/knowledge` | Блоки базы знаний для AI |
+| Рассылки | `/api/v1/broadcasts` | Кампании массовых сообщений |
+| Чат | `/api/v1/chat` | Живой чат, диалоги, передача оператору |
+| Настройки | `/api/v1/settings` | Настройка профиля бизнеса |
+| Пользователи | `/api/v1/users` | Управление пользователями и ролями |
+| Здоровье | `/api/v1/health` | Liveness и readiness-пробы |
 
 ---
 
-## Project Structure
+## Структура проекта
 
 ```
 telegram-business-assistant/
@@ -255,24 +252,24 @@ telegram-business-assistant/
 
 ---
 
-## Environment Variables
+## Переменные окружения
 
-| Variable | Required | Default | Description |
-|:---------|:---------|:--------|:------------|
-| `TELEGRAM_BOT_TOKEN` | Yes | -- | Bot token from @BotFather |
-| `SECRET_KEY` | Yes | -- | JWT signing key (min 32 chars) |
-| `ADMIN_EMAIL` | No | `admin@company.com` | Initial owner email |
-| `ADMIN_DEFAULT_PASSWORD` | No | -- | Initial owner password |
-| `DATABASE_URL` | No | Auto | PostgreSQL connection |
-| `REDIS_URL` | No | Auto | Redis connection |
-| `ANTHROPIC_API_KEY` | No | -- | For Claude AI chat |
-| `OPENAI_API_KEY` | No | -- | For GPT AI chat |
-| `TIMEZONE` | No | `UTC` | Business timezone |
-| `LOG_LEVEL` | No | `INFO` | Logging verbosity |
+| Переменная | Обязательна | По умолчанию | Описание |
+|:-----------|:------------|:-------------|:---------|
+| `TELEGRAM_BOT_TOKEN` | Да | -- | Токен бота от @BotFather |
+| `SECRET_KEY` | Да | -- | Ключ подписи JWT (мин. 32 символа) |
+| `ADMIN_EMAIL` | Нет | `admin@company.com` | Email первоначального владельца |
+| `ADMIN_DEFAULT_PASSWORD` | Нет | -- | Пароль первоначального владельца |
+| `DATABASE_URL` | Нет | Авто | Подключение к PostgreSQL |
+| `REDIS_URL` | Нет | Авто | Подключение к Redis |
+| `ANTHROPIC_API_KEY` | Нет | -- | Для Claude AI-чата |
+| `OPENAI_API_KEY` | Нет | -- | Для GPT AI-чата |
+| `TIMEZONE` | Нет | `UTC` | Часовой пояс бизнеса |
+| `LOG_LEVEL` | Нет | `INFO` | Уровень логирования |
 
 ---
 
-## Development
+## Разработка
 
 ```bash
 # Backend
@@ -285,16 +282,16 @@ uvicorn app.main:app --reload --port 8000
 # Frontend
 cd frontend && npm install && npm run dev
 
-# Tests
+# Тесты
 cd backend && pytest tests/ -v
 
-# Lint
+# Линтер
 ruff check backend/
 cd frontend && npm run lint && npx tsc --noEmit
 ```
 
 ---
 
-## License
+## Лицензия
 
-[MIT](LICENSE) — free for commercial use.
+[MIT](LICENSE) — разрешено для коммерческого использования.
